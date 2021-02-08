@@ -9,7 +9,7 @@ describe("Webpack", function() {
     logger: {
       log: function() {}
     },
-    working_directory: path.join(__dirname, ".truffle_test_temp")
+    working_directory: path.join(__dirname, ".moxie_test_temp")
   };
   var destination = config.working_directory;
 
@@ -26,8 +26,8 @@ describe("Webpack", function() {
     this.timeout(120000);
 
     return Init.fromGithub(config, "webpack", destination).then(function() {
-      // Note: the file we're looking for exists in the trufflesuite/truffle-init-default repo!
-      var expected_file_path = path.join(destination, "truffle.js");
+      // Note: the file we're looking for exists in the moxiesuite/moxie-init-default repo!
+      var expected_file_path = path.join(destination, "moxie.js");
       assert(fs.existsSync(expected_file_path), "Expected file doesn't exist!");
     });
   });

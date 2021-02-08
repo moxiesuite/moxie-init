@@ -8,7 +8,7 @@ describe("Downloader", function() {
     logger: {
       log: function() {}
     },
-    working_directory: path.join(__dirname, ".truffle_test_temp")
+    working_directory: path.join(__dirname, ".moxie_test_temp")
   };
   var destination = config.working_directory;
 
@@ -26,22 +26,22 @@ describe("Downloader", function() {
     return Init.fromGithub(config, "default", destination).then(function(init_config) {
       assert.notEqual(init_config, null);
 
-      // Note: the file we're looking for exists in the trufflesuite/truffle-init-default repo!
-      var expected_file_path = path.join(destination, "truffle.js");
+      // Note: the file we're looking for exists in the moxiesuite/moxie-init-default repo!
+      var expected_file_path = path.join(destination, "moxie.js");
       assert(fs.existsSync(expected_file_path), "Expected file doesn't exist!");
     });
   });
 
-  it("ignores files listed in the truffle-init.json file, and removes the truffle-init.json file", function() {
+  it("ignores files listed in the moxie-init.json file, and removes the moxie-init.json file", function() {
     // Assert the file is not there first.
-    assert(fs.existsSync(path.join(destination, "truffle-init.json")) == false, "truffle-init.json shouldn't be available to the user!");
+    assert(fs.existsSync(path.join(destination, "moxie-init.json")) == false, "moxie-init.json shouldn't be available to the user!");
 
     // Now assert the README.md and the .gitignore file were removed.
     assert(fs.existsSync(path.join(destination, "README.md")) == false, "README.md didn't get removed!");
     assert(fs.existsSync(path.join(destination, ".gitignore")) == false, ".gitignore didn't get removed!");
   });
 
-  it("won't re-init if truffle.js file exists", function(done) {
+  it("won't re-init if moxie.js file exists", function(done) {
     this.timeout(5000);
 
     var contracts_directory = path.join(destination, "contracts");
@@ -56,7 +56,7 @@ describe("Downloader", function() {
         assert(fs.existsSync(contracts_directory) == false, "Contracts directory got recreated when it shouldn't have");
         done();
       }).catch(function(e) {
-        if (e.message.indexOf("A Truffle project already exists at the destination.") >= 0) {
+        if (e.message.indexOf("A Moxie project already exists at the destination.") >= 0) {
           done();
         } else {
           done(new Error("Unknown error received: " + e.stack));

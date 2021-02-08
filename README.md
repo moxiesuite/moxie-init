@@ -1,2 +1,2 @@
-# truffle-init
-Initializer for example Truffle projects
+# moxie-init
+Initializer for example Moxie projects
